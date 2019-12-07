@@ -30,3 +30,13 @@ git commit -m "初始化提交"
 git log
 
 <!-- 重复提交 还是按照上述步骤 -->
+
+
+<!-- 创建分支   -->
+git  branch 分支名
+
+<!-- 切换分支   -->
+git checkout 分支名
+
+<!-- 简写  创建并切换  -->
+git branch -b dev 
