@@ -1,0 +1,99 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0; }
+
+li {
+  list-style: none; }
+
+a, .disabled {
+  color: inherit;
+  text-decoration: none; }
+
+img {
+  vertical-align: top; }
+
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden; }
+
+.hello:after {
+  content: "hello"; }
+
+/* 常规注释  在sass编译的时候  这种注释内容会出现在生成的css文件中 */
+.look {
+  width: 7.5 rem; }
+
+.error, .seriousError {
+  border: 1px solid red;
+  background-color: #fdd;
+  -ms-transition: all 1s 1s;
+  -moz-transition: all 1s 1s;
+  -o-transition: all 1s 1s;
+  -webkit-transition: all 1s 1s;
+  transition: all 1s 1s;
+  height: 12.8 rem; }
+
+.seriousError {
+  border-width: 3px; }
+
+a, .disabled {
+  color: inherit;
+  text-decoration: none; }
+
+.disabled {
+  color: gray; }
+
+html {
+  font-size: calc(100vw/10); }
+
+body {
+  background: grey;
+  font: 20px/30px "Algerian", "04b_21"; }
+
+.list {
+  width: 1280px;
+  margin: 0 auto;
+  line-height: 45px;
+  background: #FFCC99; }
+  .list > li {
+    float: left;
+    width: 150px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #FF99CC;
+    text-align: center;
+    line-height: 45px;
+    position: relative; }
+    .list > li:hover {
+      background-color: #0f0; }
+      .list > li:hover .sub {
+        height: 180px; }
+    .list > li .sub {
+      position: absolute;
+      top: 46px;
+      width: 200px;
+      height: 0;
+      overflow: hidden;
+      background-color: #0f0;
+      -ms-transition: height 1s 0s;
+      -moz-transition: height 1s 0s;
+      -o-transition: height 1s 0s;
+      -webkit-transition: height 1s 0s;
+      transition: height 1s 0s; }
+      .list > li .sub li {
+        -ms-transition: font-size 0.5s 0.5s;
+        -moz-transition: font-size 0.5s 0.5s;
+        -o-transition: font-size 0.5s 0.5s;
+        -webkit-transition: font-size 0.5s 0.5s;
+        transition: font-size 0.5s 0.5s; }
+        .list > li .sub li:hover {
+          background-color: #f00;
+          color: #fff;
+          font-size: 40px; }
+
+/*# sourceMappingURL=nav.css.map */

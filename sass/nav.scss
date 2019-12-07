@@ -1,0 +1,194 @@
+
+
+// sass 文件的导入 
+// @import "导入文件的地址";  
+
+// 细节  
+// 1  导入文件  不希望sass  重复编译 找内存
+//   解决办法   
+//  如果导入的sass文件  不希望 重复编译  可以在文件名之前添加 "_" 就可以了  eg  "_common.scss"
+
+// 2.  我想导入一个css 行不行
+//  不行 !!!!!!!
+//  解决办法     把文件后缀改为  .scsss
+
+@import "common.scss";
+@import "hello.scss";
+
+// sasa 的变量
+
+$hightlight-color:grey;
+$kawayi-color:#FFCC99;
+$warm-color:#FF99CC;
+$life-color:#0f0;
+
+// 变量的默认值
+$width:1280px !default;   
+
+$font1:14px/24px "Arial","宋体","微软雅黑";
+$font2:20px/30px  "Algerian","04b_21";
+
+
+/* 常规注释  在sass编译的时候  这种注释内容会出现在生成的css文件中 */
+// 静默注释  在sass编译的时候  这种注释内容不会出现在生成的css文件中
+
+
+// 定义混合器    (作用 可以轻易地通过引用这个名字重用这段样式)
+// 利用混合器，可以很容易地在样式表的不同地方共享样式。如果你发现自己在不停地重复一段样式，那就应该把这段样式构造成优良的混合器，尤其是这段样式本身就是一个逻辑单元，比如说是一组放在一起有意义的属性。
+// transitionAll   混合器 名称  
+
+// 调用混合器 
+// @include 混合器的名称    
+
+// @mixin transitionAll{
+//     -ms-transition: all 0.5s 0.5s;
+//     -moz-transition: all 0.5s 0.5s;
+//     -o-transition: all 0.5s 0.5s;
+//     -webkit-transition: all 0.5s 0.5s;
+//     transition: all 0.5s 0.5s;
+// }
+
+// transitionAll 缺点  不灵活  all  0.5s  0.5s
+// 不是函数
+@mixin transitionAll($attr:all,$time:1s,$delay:0s){   // 默认值
+    -ms-transition: $attr $time $delay;
+    -moz-transition: $attr $time $delay;
+    -o-transition: $attr $time $delay;
+    -webkit-transition: $attr $time $delay;
+    transition: $attr $time $delay;
+}
+
+@mixin center {
+    text-align: center;
+    line-height: 45px;
+    color: $warm-color;
+}
+
+// sass  定义函数 
+@function calcValue($val){
+    @return ($val/100px)rem;
+}
+
+.look{
+    width:calcValue(750px);
+}
+
+
+// sass  使用选择器继承来精简CSS;
+// 原本学的继承的概念  让一个类继承另一个类的属性和方法
+// sass   让一个 选择器 继承另一个 选择器 的属性和方法
+
+.error {
+    border: 1px solid red;
+    background-color: #fdd;
+    @include transitionAll(all,1s ,1s);   // 混合器
+    height:calcValue(1280px);
+}
+
+.seriousError{
+    @extend .error;   // 继承 .err 的属性
+    border-width: 3px;
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.disabled {
+  color: gray;
+  @extend a;
+}
+
+
+html{
+    // font-size: calc(100vw/7.5); // 750/7.5   => 1rem  = 100
+    font-size: calc(100vw/10);  // 750/10       => 1rem = 75px
+}
+
+body{
+    background: $hightlight-color;
+    font:$font2;
+}
+
+// sasss 嵌套结构
+
+.list{
+    width: $width;
+    margin: 0 auto;
+    line-height: 45px;
+    background: $kawayi-color;
+    //  >  子元素选择器 标识符
+    //  +  子元素选择器 标识符
+    &>li{
+        float: left;
+        width: 150px;
+        // border: 1px solid $warm-color;
+
+        // 嵌套属性  (一般用于复合属性 background)
+        border: {
+            width: 1px;
+            style:solid;
+            color:$warm-color;
+        }
+
+        // background  (color,image,repeat,position,size )
+        // background: {
+        //     color:"#6ff";
+        //     image:url();
+        //     repeat:no-repeat;
+        //     position: left top;
+        // }
+
+        text-align: center;
+        line-height: 45px;
+        position: relative;
+        // a{
+        //     display: block;
+        // }
+        
+        // sass 的父元素选择器标识符   &在sass解析是会自动的替换为父元素
+        &:hover{    
+            background-color: $life-color;
+            .sub{
+                // display: block;
+                height: 180px;
+            }
+        }
+        
+        .sub{
+            position: absolute;
+            top: 46px;
+            width: 200px;
+            height: 0;
+            overflow: hidden;
+            background-color:$life-color;
+            
+            // -ms-transition: all 0.5s 0.5s;
+            // -moz-transition: all 0.5s 0.5s;
+            // -o-transition: all 0.5s 0.5s;
+            // -webkit-transition: all 0.5s 0.5s;
+            // transition: all 0.5s 0.5s;
+
+            // @include transitionAll;
+
+            @include transitionAll(height,1s,0s);
+
+            // display: none;
+            li{ 
+                //  @include transitionAll;
+              @include transitionAll(font-size,0.5s,0.5s);
+                &:hover{
+                    background-color: #f00;
+                    color: #fff;
+                    font-size: 40px;
+                }
+            }
+        }
+    }
+}
+
+
+// .list li{
+//     float: left;
+// }

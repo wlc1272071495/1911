@@ -1,0 +1,116 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* 常规注释 */
+.active, .wrapBox .dotBox li.active {
+  background-color: red;
+}
+
+body {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 16px;
+  font-family: "Arial","宋体";
+  line-height: 32px;
+  border: 1px solid red;
+  border-left: none;
+  border-right: none;
+  margin: 50px auto;
+  margin-top: 0;
+}
+
+.wrapBox {
+  width: 400px;
+  height: 400px;
+  background-color: #6ff;
+  margin: 100px auto;
+  position: relative;
+  overflow: hidden;
+}
+.wrapBox .swiperBox, .wrapBox .dotBox {
+  opacity: 0.9;
+}
+.wrapBox .swiperBox {
+  overflow: hidden;
+  width: 2000px;
+  position: absolute;
+}
+html .wrapBox .swiperBox > li {
+  width: 400px;
+  height: 400px;
+  text-align: center;
+  line-height: 400px;
+  font-size: 30px;
+  float: left;
+}
+html .wrapBox .swiperBox > li.show {
+  display: block;
+}
+.wrapBox .swiperBox .show {
+  overflow: hidden;
+}
+.wrapBox .dotBox {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 20px;
+}
+.wrapBox .dotBox li {
+  width: 20px;
+  height: 20px;
+  float: left;
+  background-color: #fff;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+.wrapBox .left, .wrapBox .right {
+  width: 45px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 9999;
+}
+.wrapBox .right {
+  right: 0;
+  -ms-transition: all 1s 0s;
+  -moz-transition: all 1s 0s;
+  -o-transition: all 1s 0s;
+  -webkit-transition: all 1s 0s;
+  transition: all 1s 0s;
+  -ms-box-shadow: 1px 1px 2px inset rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 1px 1px 2px inset rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 1px 1px 2px inset rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 1px 1px 2px inset rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 2px inset rgba(0, 0, 0, 0.4);
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/jquery-1.10.1.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapBox">
+        <div class="left"></div>
+        <div class="right"></div>
+        <ul class="swiperBox">
+            <li class="show">01</li>
+            <li>02</li>
+            <li>03</li>
+            <li>04</li>
+            <li>01</li>
+        </ul>
+        <ul class="dotBox">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+<script>
+
+    $.extend({
+        min: function (a, b) { return a < b ? a : b; },
+        max: function (a, b) { return a > b ? a : b; },
+        isArray(item) {
+            return Array.isArray(item);
+        },
+        randColor() {
+            var str = "0123456789abcdef";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                var index = Math.round(Math.random() * (str.length - 1));
+                color += str.charAt(index);
+            }
+            return color;
+        }
+    });
+
+    // 拓展jquery 对象的动态方法(所有的jq对象都可以用)
+    $.fn.extend({
+        randColor: function () {
+            // console.log(this);
+            this.css({
+                background: $.randColor
+            })
+        }
+    });
+
+    $(".swiperBox li").randColor();
+    // 让最后一张的背景  同第一张
+    $(".swiperBox li").eq(4).css({
+        background: $(".swiperBox li").eq(0).css("background")
+    })
+
+
+    var timer = null;
+    var index = 0;
+
+    autoPlay();
+
+    $(".wrapBox").hover(function () {
+        clearInterval(timer);
+    }, function () {
+        autoPlay();
+    })
+
+    $(".dotBox li").click(function () {
+        index = $(this).index();
+        swiper();
+    })
+
+    $(".right").click(function () {
+        index++;
+        swiper();
+    })
+    $(".left").click(function () {
+        index--;
+        swiper();
+    })
+
+    // 第四张切第一张  
+    //  第四张  滚动到  第五张 切 第一张
+
+    // 第一张切第四张
+    // 第一张 切 第五张  滚动到第四张  
+
+
+    function autoPlay() {
+        clearInterval(timer);
+        timer = setInterval(function () {
+            index++;
+            swiper();
+
+            // var width = $(".swiperBox li").width();
+            // $(".swiperBox").animate({ left: -width * index }, 500, function () {
+            //     // 运动玩之后才会执行 
+            //     console.log()
+            //     if (index >= $(".swiperBox li").length - 1) {
+            //         index = 0;
+            //         $(".swiperBox").css({ left: 0 });
+            //     }
+            // });
+
+            // // 提前预判
+            // // 判断index 是否为第四张(倒数第二张滚动到最后一张);   
+            // if (index >= $(".swiperBox li").length - 1) {
+            //     // index = 0;
+            //     $(".dotBox li").eq(0).addClass("active").siblings().removeClass("active");
+            // } else {
+            //     $(".dotBox li").eq(index).addClass("active").siblings().removeClass("active");
+            // }
+
+        }, 2000);
+    }
+
+
+    function swiper() {
+
+        var width = $(".swiperBox li").width();
+        if (index < 0) {
+            // 第一张 切 第五张
+            $(".swiperBox").finish().css({ left: -width * ($(".swiperBox li").length - 1) });
+            // 下标改为第四张下标
+            index = $(".swiperBox li").length - 2;
+        }
+        // console.log(index);
+
+        $(".swiperBox").finish().animate({ left: -width * index }, 500, function () {
+            // 运动玩之后才会执行 
+            console.log()
+            if (index >= $(".swiperBox li").length - 1) {
+                index = 0;
+                $(".swiperBox").css({ left: 0 });
+            }
+        });
+
+        // 提前预判
+        // 判断index 是否为第四张(倒数第二张滚动到最后一张);   
+        if (index >= $(".swiperBox li").length - 1) {
+            // index = 0;
+            $(".dotBox li").eq(0).addClass("active").siblings().removeClass("active");
+        } else {
+            $(".dotBox li").eq(index).addClass("active").siblings().removeClass("active");
+        }
+    }
+
+    // $(".swiperBox").animate({ left: -1600 }, 5000);
+
+
+
+
+
+</script>
+
+</html>
